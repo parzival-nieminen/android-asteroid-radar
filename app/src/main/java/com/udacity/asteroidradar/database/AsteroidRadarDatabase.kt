@@ -18,19 +18,17 @@ abstract class AsteroidRadarDatabase : RoomDatabase() {
         fun getInstance(context: Context): AsteroidRadarDatabase {
 
             synchronized(this) {
-                var instance = INSTANCE
 
-                if (instance == null) {
-                    instance = Room.databaseBuilder(
+                if (INSTANCE == null) {
+                    INSTANCE = Room.databaseBuilder(
                         context.applicationContext,
                         AsteroidRadarDatabase::class.java,
                         "asteroid_database"
                     )
                         .fallbackToDestructiveMigration()
                         .build()
-                    INSTANCE = instance
                 }
-                return instance
+                return INSTANCE as AsteroidRadarDatabase
             }
         }
     }

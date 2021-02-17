@@ -2,13 +2,20 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
         <variable
             name="asteroid"
-            type="com.udacity.asteroidradar.database.Asteroid" />
+            type="com.udacity.asteroidradar.Asteroid" />
+
+        <variable
+            name="clickListener"
+            type="com.udacity.asteroidradar.main.AsteroidListener" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:onClick="@{() -> clickListener.onClick(asteroid)}">
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
