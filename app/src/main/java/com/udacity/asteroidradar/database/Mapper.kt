@@ -2,17 +2,19 @@ package com.udacity.asteroidradar.database
 
 import com.udacity.asteroidradar.Asteroid
 
+fun com.udacity.asteroidradar.database.Asteroid.mapToModel(): Asteroid {
+    return Asteroid(
+        id = this.id,
+        codename = this.codename,
+        closeApproachDate = this.closeApproachDate,
+        absoluteMagnitude = this.absoluteMagnitude,
+        estimatedDiameter = this.estimatedDiameter,
+        relativeVelocity = this.relativeVelocity,
+        distanceFromEarth = this.distanceFromEarth,
+        isPotentiallyHazardous = this.isPotentiallyHazardous
+    )
+}
+
 fun List<com.udacity.asteroidradar.database.Asteroid>.mapToModel(): List<Asteroid> {
-    return map {
-        Asteroid(
-            id = it.id,
-            codename = it.codename,
-            closeApproachDate = it.closeApproachDate,
-            absoluteMagnitude = it.absoluteMagnitude,
-            estimatedDiameter = it.estimatedDiameter,
-            relativeVelocity = it.relativeVelocity,
-            distanceFromEarth = it.distanceFromEarth,
-            isPotentiallyHazardous = it.isPotentiallyHazardous
-        )
-    }
+    return map { it.mapToModel() }
 }
