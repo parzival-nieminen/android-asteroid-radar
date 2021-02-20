@@ -35,6 +35,8 @@ class MainFragment : Fragment() {
             })
         binding.asteroidRecycler.adapter = adapter
 
+        viewModel.asteroidList.observe(viewLifecycleOwner, { adapter.submitList(it) })
+
         viewModel.navigateToDetailAsteroid.observe(viewLifecycleOwner, Observer { asteroid ->
             asteroid?.let {
                 this.findNavController().navigate(MainFragmentDirections.actionShowDetail(asteroid))

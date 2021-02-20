@@ -10,13 +10,13 @@ import com.udacity.asteroidradar.databinding.ListItemAsteroidBinding
 class AsteroidAdapter(private val asteroidListener: AsteroidListener) :
     ListAdapter<Asteroid, AsteroidAdapter.ViewHolder>(AsteroidAdapterDiffCallback()) {
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder.from(parent)
+    }
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(asteroidListener, item)
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent)
     }
 
     class ViewHolder private constructor(private val binding: ListItemAsteroidBinding) :
