@@ -11,7 +11,7 @@ import com.udacity.asteroidradar.database.mapToModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class MainViewModel(asteroidRadarDao: AsteroidRadarDao, application: Application) :
+class MainViewModel(private val database: AsteroidRadarDao, application: Application) :
     AndroidViewModel(application) {
 
     private var _asteroidList = MutableLiveData<List<Asteroid>>()
@@ -33,11 +33,19 @@ class MainViewModel(asteroidRadarDao: AsteroidRadarDao, application: Application
 
     init {
         Timber.i("init ViewModel")
-        _asteroidList.value = mutableListOf()
+
+        var one = Asteroid(1, "AAA", "AAA", .1, .1, .1, .1, true)
+        var two = Asteroid(2, "BBB", "BBB", .2, .2, .2, .2, true)
+        var tree = Asteroid(3, "CCC", "CCC", .3, .3, .3, .3, true)
+        _asteroidList.value = mutableListOf(one, two, tree, one, two, tree, one, two, tree)
+
         viewModelScope.launch {
-            _asteroidList.value = asteroidRadarDao.selectAll()?.value?.mapToModel()
+            database.insert(one.mapToModel())
+            database.insert(two.mapToModel())
+            database.insert(tree.mapToModel())
+            //_asteroidList.value = database.selectAll()?.value?.mapToModel()
         }
     }
-
 }
+
 

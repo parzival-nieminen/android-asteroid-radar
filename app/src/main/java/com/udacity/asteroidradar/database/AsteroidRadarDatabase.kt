@@ -18,7 +18,6 @@ abstract class AsteroidRadarDatabase : RoomDatabase() {
         fun getInstance(context: Context): AsteroidRadarDatabase {
 
             synchronized(this) {
-
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(
                         context.applicationContext,
