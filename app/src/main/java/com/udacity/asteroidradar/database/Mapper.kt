@@ -2,7 +2,7 @@ package com.udacity.asteroidradar.database
 
 import com.udacity.asteroidradar.Asteroid
 
-fun com.udacity.asteroidradar.database.Asteroid.mapToModel(): Asteroid {
+fun AsteroidDto.mapToModel(): Asteroid {
     return Asteroid(
         id = this.id,
         codename = this.codename,
@@ -15,12 +15,12 @@ fun com.udacity.asteroidradar.database.Asteroid.mapToModel(): Asteroid {
     )
 }
 
-fun List<com.udacity.asteroidradar.database.Asteroid>.mapToModel(): List<Asteroid> {
+fun List<AsteroidDto>.mapToModel(): List<Asteroid> {
     return map { it.mapToModel() }
 }
 
-fun Asteroid.mapToModel(): com.udacity.asteroidradar.database.Asteroid {
-    return com.udacity.asteroidradar.database.Asteroid(
+fun Asteroid.mapToDto(): AsteroidDto {
+    return AsteroidDto(
         id = this.id,
         codename = this.codename,
         closeApproachDate = this.closeApproachDate,

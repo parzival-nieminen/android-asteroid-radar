@@ -10,13 +10,13 @@ import androidx.room.Query
 interface AsteroidRadarDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(asteroid: Asteroid)
+    suspend fun insert(asteroidDto: AsteroidDto)
 
     @Query("SELECT * FROM asteroid_table WHERE id = :id")
-    suspend fun selectById(id: Long): Asteroid?
+    suspend fun selectById(id: Long): AsteroidDto?
 
     @Query("SELECT * FROM asteroid_table")
-    fun selectAll(): LiveData<List<Asteroid>>?
+    fun selectAll(): LiveData<List<AsteroidDto>>?
 
     @Query("DELETE FROM asteroid_table")
     suspend fun deleteAll()

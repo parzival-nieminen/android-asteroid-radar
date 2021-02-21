@@ -5,16 +5,24 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 // info: https://api.nasa.gov
-// example: https://api.nasa.gov/neo/rest/v1/feed?start_date=2021-02-20&end_date=2021-02-21&api_key=DEMO_KEY
-// example: https://api.nasa.gov/neo/rest/v1/feed?start_date=START_DATE&end_date=END_DATE&api_key=DEMO_KEY
-private const val BASE_URL = "https://api.nasa.gov/neo/rest/v1/"
+
+// endpoint: neo
+// url: https://api.nasa.gov/neo/rest/v1/feed?start_date=START_DATE&end_date=END_DATE&api_key=DEMO_KEY
+// example: https://api.nasa.gov/neo/rest/v1/feed?start_date=2021-02-21&end_date=2021-02-21&api_key=DEMO_KEY
+private const val BASE_URL_NEO = "https://api.nasa.gov/neo/rest/v1/"
+
+// endpoint: apod
+// url: https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY
+private const val BASE_URL_APOD = "https://api.nasa.gov/planetary/apod"
+
+// API_KEY
 private const val API_KEY = "DEMO_KEY"
 
 private fun client(): OkHttpClient {
@@ -57,7 +65,7 @@ class ApiKeyInterceptor : Interceptor {
 }
 
 object NasaApi {
-    interface NasaApiService {
+    interface NasaNeoApiService {
         @GET("feed")
         fun getNearEarthObject(
             @Query("start_date") startDate: String,
@@ -65,14 +73,26 @@ object NasaApi {
         )
     }
 
-    private val retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL)
+    interface NasaApodApiService {
+        @GET("apod")
+        fun getImageOfTheDay()
+    }
+
+    private val retrofitNeo = Retrofit.Builder()
+        .baseUrl(BASE_URL_NEO)
         .client(client())
-        //.addConverterFactory(ScalarsConverterFactory.create())
+        .addConverterFactory(ScalarsConverterFactory.create())
+        .addCallAdapterFactory(CoroutineCallAdapterFactory())
+        .build()
+
+    private val retrofitApod = Retrofit.Builder()
+        .baseUrl(BASE_URL_APOD)
+        .client(client())
         .addConverterFactory(MoshiConverterFactory.create(moshiConverter()))
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
 
-    val service = retrofit.create(NasaApiService::class.java)
+    val serviceNeo: NasaNeoApiService by lazy { retrofitNeo.create(NasaNeoApiService::class.java) }
+    val serviceApod: NasaApodApiService by lazy { retrofitApod.create(NasaApodApiService::class.java) }
 
 }

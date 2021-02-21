@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "asteroid_table")
-data class Asteroid(
+data class AsteroidDto(
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0L,
     var codename: String,
