@@ -7,6 +7,7 @@ import com.udacity.asteroidradar.PictureOfDay
 import com.udacity.asteroidradar.api.HttpClient.getNasaService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
@@ -66,10 +67,10 @@ object NasaApi {
             @Query("start_date") startDate: String,
             @Query("end_date") endDate: String,
             @Query("api_key") apiKey: String,
-        ): String
+        ): Response<String>
 
         @GET("planetary/apod")
-        suspend fun getImageOfTheDay(@Query("api_key") apiKey: String): PictureOfDay
+        suspend fun getImageOfTheDay(@Query("api_key") apiKey: String): Response<PictureOfDay>
     }
 
     val SERVICE: NasaService by lazy { getNasaService().create(NasaService::class.java) }

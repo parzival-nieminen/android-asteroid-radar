@@ -6,27 +6,23 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.udacity.asteroidradar.Asteroid
-import com.udacity.asteroidradar.Constants.API_KEY
 import com.udacity.asteroidradar.PictureOfDay
-import com.udacity.asteroidradar.api.ApiHelper
-import com.udacity.asteroidradar.api.NasaApi
-import com.udacity.asteroidradar.api.parseAsteroidsJsonResult
-import com.udacity.asteroidradar.database.AsteroidRadarDao
+import com.udacity.asteroidradar.database.AsteroidRadarDatabase
+import com.udacity.asteroidradar.service.ApplicationService
 import kotlinx.coroutines.launch
-import org.json.JSONObject
 import timber.log.Timber
 
-class MainViewModel(private val database: AsteroidRadarDao, application: Application) :
-    AndroidViewModel(application) {
+class MainViewModel(application: Application) : AndroidViewModel(application) {
 
-    private var _asteroidList = MutableLiveData<List<Asteroid>>()
-    val asteroidList: LiveData<List<Asteroid>>
-        get() = _asteroidList
-
-    private var _image = MutableLiveData<PictureOfDay>()
-    val image: LiveData<PictureOfDay> = _image
-
+    private val database = AsteroidRadarDatabase.getInstance(application)
+    private val appService = ApplicationService(database)
     private val _navigateToDetailAsteroid = MutableLiveData<Asteroid?>()
+
+    val asteroidList: LiveData<List<Asteroid>>
+        get() = appService.asteroidList
+
+    val image : LiveData<PictureOfDay>
+        get() = appService.currentImage
 
     val navigateToDetailAsteroid
         get() = _navigateToDetailAsteroid
@@ -42,20 +38,8 @@ class MainViewModel(private val database: AsteroidRadarDao, application: Applica
     init {
         Timber.i("init ViewModel")
         viewModelScope.launch {
-            _image.value = NasaApi.SERVICE.getImageOfTheDay(API_KEY)
-        }
-
-        viewModelScope.launch {
-            val result = NasaApi.SERVICE.getNearEarthObject(
-                ApiHelper.startDate(),
-                ApiHelper.endDate(),
-                API_KEY
-            )
-            val dataList = parseAsteroidsJsonResult(JSONObject(result))
-            _asteroidList.value = dataList
+            appService.insertImage()
+            appService.insertAsteroids()
         }
     }
 }
-
-
-
