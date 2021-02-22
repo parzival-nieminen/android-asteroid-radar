@@ -12,6 +12,12 @@ interface AsteroidRadarDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(asteroidDto: AsteroidDto)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(asteroidDto: List<AsteroidDto>)
+
+    @Insert()
+    suspend fun insert(imageDto: ImageDto)
+
     @Query("SELECT * FROM asteroid_table WHERE id = :id")
     suspend fun selectById(id: Long): AsteroidDto?
 

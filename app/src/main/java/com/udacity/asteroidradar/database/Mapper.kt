@@ -31,3 +31,7 @@ fun Asteroid.mapToDto(): AsteroidDto {
         isPotentiallyHazardous = this.isPotentiallyHazardous
     )
 }
+
+fun List<Asteroid>.mapToDto(): List<AsteroidDto> {
+    return map { it.mapToDto() }
+}
