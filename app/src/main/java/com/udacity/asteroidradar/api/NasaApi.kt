@@ -53,6 +53,7 @@ object HttpClient {
     private fun client(): OkHttpClient {
         if (client == null) {
             client = OkHttpClient.Builder()
+                .addInterceptor(ApiKeyInterceptor())
                 .addInterceptor(logger())
                 .build()
         }
@@ -65,12 +66,11 @@ object NasaApi {
         @GET("neo/rest/v1/feed")
         suspend fun getNearEarthObject(
             @Query("start_date") startDate: String,
-            @Query("end_date") endDate: String,
-            @Query("api_key") apiKey: String,
+            @Query("end_date") endDate: String
         ): Response<String>
 
         @GET("planetary/apod")
-        suspend fun getImageOfTheDay(@Query("api_key") apiKey: String): Response<PictureOfDay>
+        suspend fun getImageOfTheDay(): Response<PictureOfDay>
     }
 
     val SERVICE: NasaService by lazy { getNasaService().create(NasaService::class.java) }
