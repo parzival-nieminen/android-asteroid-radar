@@ -7,12 +7,12 @@ import java.util.*
 
 object ApiHelper {
 
-    fun startDate(): String {
+    fun endDate(): String {
         val startDate = SimpleDateFormat(API_QUERY_DATE_FORMAT, Locale.getDefault())
         return startDate.format(Calendar.getInstance().time)
     }
 
-    fun endDate(): String {
+    fun startDate(): String {
         val calendar = Calendar.getInstance()
         calendar.add(Calendar.DAY_OF_YEAR, DEFAULT_END_DATE_DAYS)
         val currentTime = calendar.time

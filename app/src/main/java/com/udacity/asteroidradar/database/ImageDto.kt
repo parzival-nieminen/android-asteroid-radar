@@ -2,6 +2,7 @@ package com.udacity.asteroidradar.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.udacity.asteroidradar.api.ApiHelper
 
 @Entity(tableName = "image_table")
 data class ImageDto(
@@ -9,5 +10,5 @@ data class ImageDto(
     val url: String,
     val mediaType: String,
     val title: String,
-    val day: String
+    val day: String = ApiHelper.endDate()
 )

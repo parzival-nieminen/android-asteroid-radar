@@ -3,6 +3,7 @@ package com.udacity.asteroidradar.database
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.udacity.asteroidradar.api.ApiHelper
 
 @Entity(tableName = "asteroid_table")
 data class AsteroidDto(
@@ -20,5 +21,6 @@ data class AsteroidDto(
     @ColumnInfo(name = "distance_from_earth")
     val distanceFromEarth: Double,
     @ColumnInfo(name = "is_potentially_hazardous")
-    val isPotentiallyHazardous: Boolean
+    val isPotentiallyHazardous: Boolean,
+    val day: String = ApiHelper.endDate()
 )

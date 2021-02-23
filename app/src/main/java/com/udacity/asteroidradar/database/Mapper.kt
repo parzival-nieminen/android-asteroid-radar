@@ -2,7 +2,6 @@ package com.udacity.asteroidradar.database
 
 import com.udacity.asteroidradar.Asteroid
 import com.udacity.asteroidradar.PictureOfDay
-import com.udacity.asteroidradar.api.ApiHelper.startDate
 
 fun AsteroidDto.mapToModel(): Asteroid {
     return Asteroid(
@@ -40,8 +39,7 @@ fun PictureOfDay.mapToDto(): ImageDto {
     return ImageDto(
         mediaType = this.mediaType,
         title = this.title,
-        url = this.url,
-        day = startDate()
+        url = this.url
     )
 }
 
