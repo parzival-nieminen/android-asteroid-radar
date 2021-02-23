@@ -2,7 +2,7 @@ package com.udacity.asteroidradar.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.udacity.asteroidradar.api.ApiHelper
+import com.udacity.asteroidradar.network.ApiHelper
 
 @Entity(tableName = "image_table")
 data class ImageDto(

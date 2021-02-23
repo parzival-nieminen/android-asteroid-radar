@@ -1,4 +1,4 @@
-package com.udacity.asteroidradar.api
+package com.udacity.asteroidradar.network
 
 import com.udacity.asteroidradar.Constants.API_QUERY_DATE_FORMAT
 import com.udacity.asteroidradar.Constants.DEFAULT_END_DATE_DAYS

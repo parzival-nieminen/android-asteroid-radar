@@ -1,13 +1,13 @@
-package com.udacity.asteroidradar.service
+package com.udacity.asteroidradar.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.udacity.asteroidradar.Asteroid
-import com.udacity.asteroidradar.PictureOfDay
-import com.udacity.asteroidradar.api.ApiHelper.startDate
-import com.udacity.asteroidradar.api.ApiHelper.endDate
-import com.udacity.asteroidradar.api.NasaApi
-import com.udacity.asteroidradar.api.parseAsteroidsJsonResult
+import com.udacity.asteroidradar.domain.PictureOfDay
+import com.udacity.asteroidradar.network.ApiHelper.startDate
+import com.udacity.asteroidradar.network.ApiHelper.endDate
+import com.udacity.asteroidradar.network.NasaApi
+import com.udacity.asteroidradar.network.parseAsteroidsJsonResult
 import com.udacity.asteroidradar.database.AsteroidRadarDatabase
 import com.udacity.asteroidradar.database.mapToDto
 import com.udacity.asteroidradar.database.mapToModel
@@ -16,7 +16,7 @@ import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import timber.log.Timber
 
-class ApplicationService(private val database: AsteroidRadarDatabase) {
+class AppRepository(private val database: AsteroidRadarDatabase) {
 
     val currentImage: LiveData<PictureOfDay>
         get() = Transformations.map(database.asteroidRadarDao.selectCurrentImage()) { it?.mapToModel() }
