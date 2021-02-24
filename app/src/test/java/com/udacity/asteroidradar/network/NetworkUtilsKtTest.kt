@@ -1,9 +1,9 @@
-package com.udacity.asteroidradar.api
+package com.udacity.asteroidradar.network
 
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import com.udacity.asteroidradar.PictureOfDay
+import com.udacity.asteroidradar.domain.PictureOfDay
 import com.udacity.asteroidradar.TestHelper
 import org.junit.Assert
 import org.junit.Test
