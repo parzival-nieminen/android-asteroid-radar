@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.udacity.asteroidradar.Asteroid
+import com.udacity.asteroidradar.domain.Asteroid
 import com.udacity.asteroidradar.domain.PictureOfDay
 import com.udacity.asteroidradar.database.AsteroidRadarDatabase
 import com.udacity.asteroidradar.repository.AppRepository
@@ -38,8 +38,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     init {
         Timber.i("init ViewModel")
         viewModelScope.launch {
-            appService.insertImage()
-            appService.insertAsteroids()
+            appService.refreshImage()
+            appService.refreshAsteroids()
         }
     }
 }

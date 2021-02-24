@@ -1,7 +1,7 @@
 package com.udacity.asteroidradar.main
 
 import androidx.recyclerview.widget.DiffUtil
-import com.udacity.asteroidradar.Asteroid
+import com.udacity.asteroidradar.domain.Asteroid
 
 class AsteroidAdapterDiffCallback : DiffUtil.ItemCallback<Asteroid>() {
     override fun areItemsTheSame(oldItem: Asteroid, newItem: Asteroid): Boolean {

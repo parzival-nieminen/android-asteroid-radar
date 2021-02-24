@@ -1,4 +1,4 @@
-package com.udacity.asteroidradar
+package com.udacity.asteroidradar.domain
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
@@ -10,3 +10,4 @@ data class Asteroid(
     val relativeVelocity: Double, val distanceFromEarth: Double,
     val isPotentiallyHazardous: Boolean
 ) : Parcelable
+

@@ -2,7 +2,7 @@ package com.udacity.asteroidradar.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import com.udacity.asteroidradar.Asteroid
+import com.udacity.asteroidradar.domain.Asteroid
 import com.udacity.asteroidradar.domain.PictureOfDay
 import com.udacity.asteroidradar.network.ApiHelper.startDate
 import com.udacity.asteroidradar.network.ApiHelper.endDate
@@ -24,7 +24,7 @@ class AppRepository(private val database: AsteroidRadarDatabase) {
     val asteroidList: LiveData<List<Asteroid>> =
         Transformations.map(database.asteroidRadarDao.selectAll()) { it?.mapToModel() }
 
-    suspend fun insertAsteroids() {
+    suspend fun refreshAsteroids() {
         withContext(Dispatchers.IO) {
             try {
                 val response = NasaApi.SERVICE.getNearEarthObject(startDate(), endDate())
@@ -42,7 +42,7 @@ class AppRepository(private val database: AsteroidRadarDatabase) {
         }
     }
 
-    suspend fun insertImage() {
+    suspend fun refreshImage() {
         withContext(Dispatchers.IO) {
             try {
                 val response = NasaApi.SERVICE.getImageOfTheDay()
