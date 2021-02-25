@@ -27,6 +27,6 @@ interface AsteroidRadarDao {
     @Query("DELETE FROM asteroid_table")
     fun deleteAll()
 
-    @Query("SELECT * FROM image_table WHERE mediaType = 'image' ORDER BY id DESC LIMIT 1")
+    @Query("SELECT * FROM image_table ORDER BY id DESC LIMIT 1")
     fun selectCurrentImage(): LiveData<ImageDto>
 }

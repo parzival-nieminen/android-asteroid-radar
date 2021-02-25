@@ -1,6 +1,6 @@
 package com.udacity.asteroidradar.network
 
-import com.udacity.asteroidradar.Constants
+import com.udacity.asteroidradar.util.Constants
 import okhttp3.Interceptor
 
 class ApiKeyInterceptor : Interceptor {
