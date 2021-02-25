@@ -15,14 +15,14 @@ import timber.log.Timber
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val database = AsteroidRadarDatabase.getInstance(application)
-    private val appService = AppRepository(database)
+    private val appRepository = AppRepository(database)
     private val _navigateToDetailAsteroid = MutableLiveData<Asteroid?>()
 
     val asteroidList: LiveData<List<Asteroid>>
-        get() = appService.asteroidList
+        get() = appRepository.asteroidList
 
     val image : LiveData<PictureOfDay>
-        get() = appService.currentImage
+        get() = appRepository.currentImage
 
     val navigateToDetailAsteroid
         get() = _navigateToDetailAsteroid
@@ -38,8 +38,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     init {
         Timber.i("init ViewModel")
         viewModelScope.launch {
-            appService.refreshImage()
-            appService.refreshAsteroids()
+            appRepository.refreshImage()
+            appRepository.refreshAsteroids()
         }
     }
 }

@@ -9,7 +9,7 @@ import com.udacity.asteroidradar.network.ApiHelper.endDate
 import com.udacity.asteroidradar.network.NasaApi
 import com.udacity.asteroidradar.network.parseAsteroidsJsonResult
 import com.udacity.asteroidradar.database.AsteroidRadarDatabase
-import com.udacity.asteroidradar.database.mapToDto
+import com.udacity.asteroidradar.database.mapToTable
 import com.udacity.asteroidradar.database.mapToModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -31,7 +31,7 @@ class AppRepository(private val database: AsteroidRadarDatabase) {
                 if (response.isSuccessful) {
                     response.body()?.let {
                         val data = parseAsteroidsJsonResult(JSONObject(it))
-                        database.asteroidRadarDao.insertAll(*data.mapToDto())
+                        database.asteroidRadarDao.insertAll(*data.mapToTable())
                     }
                 } else {
                     Timber.e("insertAsteroids call failed: ${response.errorBody().toString()}")
@@ -48,7 +48,7 @@ class AppRepository(private val database: AsteroidRadarDatabase) {
                 val response = NasaApi.SERVICE.getImageOfTheDay()
                 if (response.isSuccessful) {
                     response.body()?.let {
-                        database.asteroidRadarDao.insert(it.mapToDto())
+                        database.asteroidRadarDao.insert(it.mapToTable())
                     }
                 } else {
                     Timber.e("insertAsteroids call failed: ${response.errorBody().toString()}")

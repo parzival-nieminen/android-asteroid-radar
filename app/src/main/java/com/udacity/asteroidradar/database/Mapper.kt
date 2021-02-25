@@ -3,7 +3,7 @@ package com.udacity.asteroidradar.database
 import com.udacity.asteroidradar.domain.Asteroid
 import com.udacity.asteroidradar.domain.PictureOfDay
 
-fun AsteroidDto.mapToModel(): Asteroid {
+fun AsteroidTable.mapToModel(): Asteroid {
     return Asteroid(
         id = this.id,
         codename = this.codename,
@@ -16,13 +16,13 @@ fun AsteroidDto.mapToModel(): Asteroid {
     )
 }
 
-fun List<AsteroidDto>.mapToModel(): List<Asteroid> {
+fun List<AsteroidTable>.mapToModel(): List<Asteroid> {
     return map { it.mapToModel() }
 }
 
-fun List<Asteroid>.mapToDto(): Array<AsteroidDto> {
+fun List<Asteroid>.mapToTable(): Array<AsteroidTable> {
     return map {
-        AsteroidDto(
+        AsteroidTable(
             id = it.id,
             codename = it.codename,
             closeApproachDate = it.closeApproachDate,
@@ -35,15 +35,15 @@ fun List<Asteroid>.mapToDto(): Array<AsteroidDto> {
     }.toTypedArray()
 }
 
-fun PictureOfDay.mapToDto(): ImageDto {
-    return ImageDto(
+fun PictureOfDay.mapToTable(): ImageTable {
+    return ImageTable(
         mediaType = this.mediaType,
         title = this.title,
         url = this.url
     )
 }
 
-fun ImageDto.mapToModel(): PictureOfDay {
+fun ImageTable.mapToModel(): PictureOfDay {
     return PictureOfDay(
         mediaType = this.mediaType,
         title = this.title,

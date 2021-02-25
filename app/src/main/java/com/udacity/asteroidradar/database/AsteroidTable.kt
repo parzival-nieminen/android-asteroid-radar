@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import com.udacity.asteroidradar.network.ApiHelper
 
 @Entity(tableName = "asteroid_table")
-data class AsteroidDto(
+data class AsteroidTable(
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0L,
     var codename: String,

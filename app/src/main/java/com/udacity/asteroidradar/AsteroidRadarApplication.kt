@@ -12,9 +12,9 @@ import java.util.concurrent.TimeUnit
 
 class AsteroidRadarApplication : Application() {
 
-    val applicationScope = CoroutineScope(Dispatchers.Default)
+    private val applicationScope = CoroutineScope(Dispatchers.Default)
 
-    private fun deplayInit() {
+    private fun delayedInit() {
         applicationScope.launch { setupRecurringWork() }
     }
 
@@ -43,6 +43,6 @@ class AsteroidRadarApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
-        deplayInit()
+        delayedInit()
     }
 }

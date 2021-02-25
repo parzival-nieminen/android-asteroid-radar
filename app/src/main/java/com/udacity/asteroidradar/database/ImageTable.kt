@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import com.udacity.asteroidradar.network.ApiHelper
 
 @Entity(tableName = "image_table")
-data class ImageDto(
+data class ImageTable(
     @PrimaryKey(autoGenerate = true) val id: Long = 0L,
     val url: String,
     val mediaType: String,
