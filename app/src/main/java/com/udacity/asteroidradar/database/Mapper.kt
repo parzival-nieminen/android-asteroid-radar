@@ -5,14 +5,14 @@ import com.udacity.asteroidradar.domain.PictureOfDay
 
 fun AsteroidTable.mapToModel(): Asteroid {
     return Asteroid(
-        id = this.id,
-        codename = this.codename,
-        closeApproachDate = this.closeApproachDate,
-        absoluteMagnitude = this.absoluteMagnitude,
-        estimatedDiameter = this.estimatedDiameter,
-        relativeVelocity = this.relativeVelocity,
-        distanceFromEarth = this.distanceFromEarth,
-        isPotentiallyHazardous = this.isPotentiallyHazardous
+        id = id,
+        codename = codename,
+        closeApproachDate = closeApproachDate,
+        absoluteMagnitude = absoluteMagnitude,
+        estimatedDiameter = estimatedDiameter,
+        relativeVelocity = relativeVelocity,
+        distanceFromEarth = distanceFromEarth,
+        isPotentiallyHazardous = isPotentiallyHazardous
     )
 }
 
@@ -37,16 +37,16 @@ fun List<Asteroid>.mapToTable(): Array<AsteroidTable> {
 
 fun PictureOfDay.mapToTable(): ImageTable {
     return ImageTable(
-        mediaType = this.mediaType,
-        title = this.title,
-        url = this.url
+        mediaType = mediaType,
+        title = title,
+        url = url
     )
 }
 
 fun ImageTable.mapToModel(): PictureOfDay {
     return PictureOfDay(
-        mediaType = this.mediaType,
-        title = this.title,
-        url = this.url
+        mediaType = mediaType,
+        title = title,
+        url = url
     )
 }

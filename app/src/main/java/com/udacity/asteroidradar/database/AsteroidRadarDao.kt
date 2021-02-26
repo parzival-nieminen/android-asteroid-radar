@@ -10,23 +10,20 @@ import androidx.room.Query
 interface AsteroidRadarDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(asteroidTable: AsteroidTable)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg asteroid: AsteroidTable)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(imageTable: ImageTable)
 
-    @Query("SELECT * FROM asteroid_table WHERE id = :id")
-    fun selectById(id: Long): AsteroidTable?
-
-    @Query("SELECT * FROM asteroid_table ORDER BY id DESC")
+    @Query("SELECT * FROM asteroid_table ORDER BY close_approach_date ASC")
     fun selectAll(): LiveData<List<AsteroidTable>>
 
-    @Query("DELETE FROM asteroid_table")
-    fun deleteAll()
-
-    @Query("SELECT * FROM image_table ORDER BY id DESC LIMIT 1")
+    @Query("SELECT * FROM image_table ORDER BY day DESC LIMIT 1")
     fun selectCurrentImage(): LiveData<ImageTable>
+
+    @Query("DELETE FROM asteroid_table WHERE date(close_approach_date) < date(:today)")
+    fun deleteAllOldAsteroids(today: String)
+
+    @Query("DELETE FROM asteroid_table WHERE date(day) < date(:today)")
+    fun deleteAllOldImages(today: String)
 }
