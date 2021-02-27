@@ -1,6 +1,6 @@
 package com.udacity.asteroidradar.network
 
-import com.udacity.asteroidradar.util.Constants
+import com.udacity.asteroidradar.BuildConfig
 import okhttp3.Interceptor
 
 class ApiKeyInterceptor : Interceptor {
@@ -9,7 +9,7 @@ class ApiKeyInterceptor : Interceptor {
         val originalHttpUrl = original.url;
 
         val url = originalHttpUrl.newBuilder()
-            .addQueryParameter("api_key", Constants.API_KEY)
+            .addQueryParameter("api_key", BuildConfig.API_KEY)
             .build();
 
         val requestBuilder = original.newBuilder()
