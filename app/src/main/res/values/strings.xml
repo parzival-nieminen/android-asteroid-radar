@@ -22,4 +22,9 @@
     <string name="content_text_codename">Codename is %s</string>
     <string name="content_text_closeApproachDate">close approach date is %s</string>
     <string name="content_image_state">is potentially hazardous %s</string>
+    <string name="content_text_absoluteMagnitude">absolute magnitude %s</string>
+    <string name="content_text_info">content info</string>
+    <string name="content_text_estimatedDiameter">estimated diameter %s</string>
+    <string name="content_text_distanceFromEarth">distance from earth %s</string>
+    <string name="content_text_relativeVelocity">relative velocity %s</string>
 </resources>
