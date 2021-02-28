@@ -3,6 +3,12 @@
 [![Android CI](https://github.com/parzival-nieminen/android-asteroid-radar/workflows/Android%20CI/badge.svg)](https://github.com/parzival-nieminen/android-asteroid-radar/actions)
 
 [CI Actions](https://github.com/parzival-nieminen/android-asteroid-radar/actions)
+
+## API_KEY
+The current API_KEY is the public key from nasa max 30 Request per day
+If you need more, please replace the API_KEY with your key from nasa.
+Open Constants.kt and replace the current API_KEY = "DEMO_KEY"
+
 ## Getting Started
 
 Asteroid Radar is an app to view the asteroids detected by NASA that pass near Earth, you can view all the detected asteroids in a period of time, their data (Size, velocity, distance to Earth) and if they are potentially hazardous.
