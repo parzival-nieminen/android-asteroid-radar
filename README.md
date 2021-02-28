@@ -5,7 +5,7 @@
 [CI Actions](https://github.com/parzival-nieminen/android-asteroid-radar/actions)
 
 ## API_KEY
-The current API_KEY is the public key from NASA max 30 Request per day
+The current API_KEY is the public key from NASA max 30 Request per day.
 Open Constants.kt and replace the current API_KEY = "DEMO_KEY"
 
 ## Getting Started
