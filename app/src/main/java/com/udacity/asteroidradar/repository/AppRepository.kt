@@ -29,11 +29,16 @@ class AppRepository(private val database: AsteroidRadarDatabase) {
     suspend fun refreshAsteroids() {
         withContext(Dispatchers.IO) {
             try {
-                val response = NasaApi.SERVICE.getNearEarthObject(startDate(), endDate())
-                if (response.isSuccessful) {
-                    response.body()?.let {
-                        val data = parseAsteroidsJsonResult(JSONObject(it))
-                        database.asteroidRadarDao.insertAll(*data.mapToTable())
+                val hasCurrentAsteroidsInDatabase =
+                    database.asteroidRadarDao.selectHasCurrentAsteroids(endDate())
+                if (hasCurrentAsteroidsInDatabase == 0) {
+                    Timber.i("Fetching Asteroids")
+                    val response = NasaApi.SERVICE.getNearEarthObject(startDate(), endDate())
+                    if (response.isSuccessful) {
+                        response.body()?.let {
+                            val data = parseAsteroidsJsonResult(JSONObject(it))
+                            database.asteroidRadarDao.insertAll(*data.mapToTable())
+                        }
                     }
                 }
             } catch (error: HttpException) {
@@ -50,11 +55,15 @@ class AppRepository(private val database: AsteroidRadarDatabase) {
     suspend fun refreshImage() {
         withContext(Dispatchers.IO) {
             try {
-                val response = NasaApi.SERVICE.getImageOfTheDay()
-                if (response.isSuccessful) {
-                    response.body()?.let {
-                        database.asteroidRadarDao.insert(it.mapToTable())
-                        database.asteroidRadarDao.deleteAllOldImages(endDate())
+                val hasCurrentImageInDatabase =
+                    database.asteroidRadarDao.selectHasCurrentImage(endDate())
+                if (hasCurrentImageInDatabase == 0) {
+                    Timber.i("Fetching Image of the day")
+                    val response = NasaApi.SERVICE.getImageOfTheDay()
+                    if (response.isSuccessful) {
+                        response.body()?.let {
+                            database.asteroidRadarDao.insert(it.mapToTable())
+                        }
                     }
                 }
             } catch (error: HttpException) {
@@ -71,6 +80,7 @@ class AppRepository(private val database: AsteroidRadarDatabase) {
     suspend fun deleteAllOldData() {
         withContext(Dispatchers.IO) {
             try {
+                Timber.i("delete all old Data")
                 val today = endDate()
                 database.asteroidRadarDao.deleteAllOldAsteroids(today)
                 database.asteroidRadarDao.deleteAllOldImages(today)

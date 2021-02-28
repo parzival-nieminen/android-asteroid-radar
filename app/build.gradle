@@ -4,10 +4,6 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 apply plugin: 'kotlin-parcelize'
 
-def propertiesFile = rootProject.file("local.properties")
-def properties = new Properties()
-properties.load(new FileInputStream(propertiesFile))
-
 android {
     compileSdkVersion 30
     buildToolsVersion '30.0.3'
@@ -18,7 +14,6 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField 'String', 'API_KEY', properties.getProperty('API_KEY')
     }
     buildTypes {
         release {

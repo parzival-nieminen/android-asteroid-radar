@@ -12,7 +12,6 @@ data class AsteroidTable(
     var id: Long = 0L,
     var codename: String,
     @ColumnInfo(name = "close_approach_date")
-    @TypeConverters(Converter::class)
     val closeApproachDate: String,
     @ColumnInfo(name = "absolute_magnitude")
     val absoluteMagnitude: Double,
@@ -24,6 +23,5 @@ data class AsteroidTable(
     val distanceFromEarth: Double,
     @ColumnInfo(name = "is_potentially_hazardous")
     val isPotentiallyHazardous: Boolean,
-    @TypeConverters(Converter::class)
     val day: String = ApiHelper.endDate()
 )

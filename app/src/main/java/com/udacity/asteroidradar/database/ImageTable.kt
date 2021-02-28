@@ -11,6 +11,5 @@ data class ImageTable(
     val url: String,
     val mediaType: String,
     val title: String,
-    @TypeConverters(Converter::class)
     val day: String = ApiHelper.endDate()
 )
